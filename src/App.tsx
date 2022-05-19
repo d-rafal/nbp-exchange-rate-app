@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import useCurrenciesExchangeRateProvider from "./hooks/useCurrenciesExchangeRateProvider";
+import ErrorIndicator from "./components/error-indicator";
+
+import LoadingIndicator from "./components/loading-indicator";
+import TableCurrencyExchangeRate from "./components/table-currency-exchange-rate";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const {
+    currenciesExchangeRateFromApi,
+    actionStatus: fetchingDataActionStatus,
+  } = useCurrenciesExchangeRateProvider();
+
+  if (fetchingDataActionStatus === "FAILED") {
+    return <ErrorIndicator />;
+  } else if (fetchingDataActionStatus === "PROCESSING") {
+    return <LoadingIndicator />;
+  } else {
+    return (
+      <TableCurrencyExchangeRate
+        currenciesExchangeRateFromApi={currenciesExchangeRateFromApi}
+      />
+    );
+  }
 }
 
 export default App;
