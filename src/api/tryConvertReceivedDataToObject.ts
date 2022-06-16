@@ -15,6 +15,9 @@ export const tryConvertReceivedDataToObject = (
     currencies: [],
   };
 
+  // możba też zrobić cos takiego w ten sposób
+  const receivedDataConvertedToObject2 = {} as CurrenciesExchangeRateFromApi;
+
   const tableNr = doc.getElementsByTagName("numer_tabeli")[0].textContent;
   const publicationDate =
     doc.getElementsByTagName("data_publikacji")[0].textContent;
