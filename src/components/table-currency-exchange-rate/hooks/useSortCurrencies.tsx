@@ -36,7 +36,10 @@ const useSortCurrencies = (
           (a, b) => b.averageExchangeRate - a.averageExchangeRate
         );
         break;
-      default:
+      case null:
+        break;
+      default: // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const _exhaustiveCheck: never = sortingOrder;
         break;
     }
 
